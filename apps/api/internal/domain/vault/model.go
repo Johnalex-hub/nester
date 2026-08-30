@@ -61,6 +61,11 @@ var (
 	// recurring-deposit job queue handler, #846) can treat this as "already
 	// recorded" and safely no-op rather than fail.
 	ErrDuplicateTransaction = errors.New("transaction already recorded")
+	// ErrOperatorFundedDepositRefused is returned when a deposit would have
+	// to be funded from the shared operator account and policy forbids it.
+	// The caller's remedy is to sign and submit the deposit from their own
+	// wallet and supply the resulting tx_hash (nester#1152).
+	ErrOperatorFundedDepositRefused = errors.New("deposits must be signed and funded by your own wallet: submit the transaction and supply its tx_hash")
 	ErrCapacityExceeded     = errors.New("deposit would exceed vault capacity limit")
 	// ErrUserCancelled is returned when a user declines the wallet signature
 	// or abandons an attempt before submission. It exists to keep that case
