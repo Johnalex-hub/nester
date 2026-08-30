@@ -61,6 +61,10 @@ var (
 	// recurring-deposit job queue handler, #846) can treat this as "already
 	// recorded" and safely no-op rather than fail.
 	ErrDuplicateTransaction = errors.New("transaction already recorded")
+	// ErrInvalidSharePrice is returned when a vault's share price is zero or
+	// negative, which makes an asset/share conversion meaningless. It signals
+	// corrupted balances rather than bad user input.
+	ErrInvalidSharePrice = errors.New("vault share price is not positive")
 	ErrCapacityExceeded     = errors.New("deposit would exceed vault capacity limit")
 	// ErrUserCancelled is returned when a user declines the wallet signature
 	// or abandons an attempt before submission. It exists to keep that case
